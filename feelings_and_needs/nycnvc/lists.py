@@ -1,6 +1,7 @@
-feelings = list()
+positive_feelings = list()
+negative_feelings = list()
 
-feelings.append("""affectionate
+positive_feelings.append("""affectionate
 compassionate
 fond
 loving
@@ -8,7 +9,7 @@ openhearted
 tender
 warm""".split())
 
-feelings.append("""engaged
+positive_feelings.append("""engaged
 absorbed
 curious
 engrossed
@@ -23,7 +24,7 @@ open
 spellbound
 stimulated""".split())
 
-feelings.append("""excited
+positive_feelings.append("""excited
 amazed
 ardent
 aroused 
@@ -38,7 +39,7 @@ passionate
 surprised
 vibrant""".split())
 
-feelings.append("""exhilirated
+positive_feelings.append("""exhilirated
 enthralled
 radiant
 electrified
@@ -46,13 +47,13 @@ euphoric
 overjoyed
 thrilled""".split())
 
-feelings.append("""grateful
+positive_feelings.append("""grateful
 appreciative
 moved
 thankful
 touched""".split())
 
-feelings.append("""happy
+positive_feelings.append("""happy
 amused
 blissful
 cheerful
@@ -70,7 +71,7 @@ pleased
 rapturous
 tickled""".split())
 
-feelings.append("""hopeful
+positive_feelings.append("""hopeful
 confident
 expectant
 jazzed
@@ -79,7 +80,7 @@ sanguine
 up
 upbeat""".split())
 
-feelings.append("""inspired
+positive_feelings.append("""inspired
 amazed
 eager
 enthused
@@ -90,7 +91,7 @@ stimulated
 stirred
 wonder""".split())
 
-feelings.append("""peaceful
+positive_feelings.append("""peaceful
 calm
 comfortable
 centered
@@ -106,7 +107,7 @@ satisfied
 serene
 tranquil""".split())
 
-feelings.append("""refreshed
+positive_feelings.append("""refreshed
 recharged
 rejuvenated
 renewed
@@ -114,7 +115,7 @@ rested
 restored
 revived""".split())
 
-feelings.append("""anger
+negative_feelings.append("""anger
 aggravated
 angry
 animosity
@@ -137,7 +138,7 @@ outraged
 peeved
 resentful""".split())
 
-feelings.append("""aversion
+negative_feelings.append("""aversion
 abhorrence
 appalled
 bothered displeased
@@ -149,7 +150,7 @@ loathing
 repulsion
 revulsion""".split())
 
-feelings.append("""confusion
+negative_feelings.append("""confusion
 ambivalent
 baffled bewildered
 conflicted
@@ -161,7 +162,7 @@ mystified
 perplexed puzzled
 torn""".split())
 
-feelings.append("""disconnection
+negative_feelings.append("""disconnection
 apathetic
 bored
 closed
@@ -172,7 +173,7 @@ listless
 numb
 withdrawn""".split())
 
-feelings.append("""DISQUIET
+negative_feelings.append("""DISQUIET
 agitated
 alarmed
 concerned
@@ -196,7 +197,7 @@ unnerved
 unsettled
 upset""".split())
 
-feelings.append("""EMBARRASSMENT
+negative_feelings.append("""EMBARRASSMENT
 ashamed
 chagrined
 discomfited
@@ -204,7 +205,7 @@ flustered
 mortified
 self-conscious""".split())
 
-feelings.append("""fatigue
+negative_feelings.append("""fatigue
 beat
 burnt out
 depleted
@@ -217,7 +218,7 @@ weary
 wiped out
  worn out""".split())
 
-feelings.append("""fear
+negative_feelings.append("""fear
 afraid
 anxious
 apprehensive
@@ -238,7 +239,7 @@ trepidation
 wary
 worried""".split())
 
-feelings.append("""pain
+negative_feelings.append("""pain
 aching
 agony
 anguished
@@ -252,7 +253,7 @@ miserable
 regretful
 remorseful""".split())
 
-feelings.append("""sadness
+negative_feelings.append("""sadness
 depressed
 dejected
 despairing 
@@ -269,7 +270,7 @@ miserable
 unhappy
 wistful""".split())
 
-feelings.append("""tension
+negative_feelings.append("""tension
 anxious
 closed
 distressed
@@ -283,9 +284,10 @@ overwhelmed
 restless
 stressed out""".split())
 
-feelings.append("""yearning
+negative_feelings.append("""yearning
 longing
 nostalgic
 pining""".split())
 
-print(feelings)
+print(positive_feelings)
+print(negative_feelings)
