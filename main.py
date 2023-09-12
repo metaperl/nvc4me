@@ -1,5 +1,7 @@
 from nicegui import ui
 
+from feelings_and_needs.nycnvc.lists import feelings
+
 needs = list()
 feeling_phrase = 'x'
 
