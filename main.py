@@ -3,7 +3,7 @@ from nicegui import ui
 from feelings_and_needs.nycnvc.lists import positive_feelings, negative_feelings
 
 needs = list()
-feelings = list()
+feelings = set()
 feeling_phrase = "feeling"
 
 ui.label('I AM')
@@ -17,7 +17,7 @@ def store_feeling_phrase(p):
 def add_feeling(p):
     global feelings
     print(f"Storing {p}")
-    feelings.append(p)
+    feelings.add(p)
     generate_sentence()
 
 feeling_toggle = ui.toggle(
@@ -46,10 +46,10 @@ with ui.row():
 
 def generate_sentence():
     global feeling_phrase
-    feelings_joined = ",".join(feelings)
+    feelings_joined = ", ".join(list(feelings))
     print(f"in gen sen, {feeling_phrase=}. {feelings_joined=} ")
 
-    sentence = ["I am ", feeling_phrase, feelings_joined]
+    sentence = ["I am ", feeling_phrase, " ", feelings_joined]
     nvc_sentence.set_text(sentence)
 
 nvc_sentence = ui.label()
