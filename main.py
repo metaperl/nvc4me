@@ -1,9 +1,9 @@
 from nicegui import ui
 
-from feelings_and_needs.nycnvc.lists import positive_feelings, negative_feelings
+from feelings_and_needs.nycnvc.lists import feelings
 
 needs = list()
-feelings = set()
+chosen_feelings = set()
 feeling_phrase = "feeling"
 
 ui.label('I AM')
@@ -15,9 +15,9 @@ def store_feeling_phrase(p):
     generate_sentence()
 
 def add_feeling(p):
-    global feelings
+    global chosen_feelings
     print(f"Storing {p}")
-    feelings.add(p)
+    chosen_feelings.add(p)
     generate_sentence()
 
 feeling_toggle = ui.toggle(
@@ -28,25 +28,22 @@ feeling_toggle = ui.toggle(
 
 selects = list()
 
-with ui.row():
-    ui.label('Positive Feelings')
-    for _ in positive_feelings:
-        print(f"--> Currently working with {_}")
-        selects.append(
-            ui.select(_, value=_[0], on_change=lambda e: add_feeling(e.value))
-        )
+for f in "negative positive".split():
+    with ui.row():
+        ui.label(f'{f} Feelings')
+        for _ in feelings[f]:
+            print(f"--> Currently working with {_}")
+            with ui.column():
+                ui.label(_[0].upper())
+                selects.append(
+                    ui.select(_, on_change=lambda e: add_feeling(e.value))
+                )
 
-with ui.row():
-    ui.label('Negative Feelings')
-    for _ in negative_feelings:
-        print(f"--> Currently working with {_}")
-        selects.append(
-            ui.select(_, value=_[0], on_change=lambda e: add_feeling(e.value))
-        )
+
 
 def generate_sentence():
     global feeling_phrase
-    feelings_joined = ", ".join(list(feelings))
+    feelings_joined = ", ".join(list(chosen_feelings))
     print(f"in gen sen, {feeling_phrase=}. {feelings_joined=} ")
 
     sentence = ["I am ", feeling_phrase, " ", feelings_joined]

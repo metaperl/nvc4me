@@ -1,3 +1,4 @@
+feelings = dict()
 positive_feelings = list()
 negative_feelings = list()
 
@@ -289,5 +290,7 @@ longing
 nostalgic
 pining""".split())
 
-print(positive_feelings)
-print(negative_feelings)
+feelings['positive'] = positive_feelings
+feelings['negative'] = negative_feelings
+
+print(feelings)
