@@ -40,6 +40,7 @@ class MyApp(Application):
 
     def reset(self):
         self.nvc = NVC()
+        self.start()
 
     def build_ui(self):
         ui.label('I AM')
@@ -64,6 +65,8 @@ class MyApp(Application):
                         )
 
         self.ui_sentence = ui.label()
+
+        ui.button('RESET', on_click=lambda: self.reset())
 
     def start(self):
         self.build_ui()
