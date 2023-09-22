@@ -38,6 +38,9 @@ class MyApp(Application):
         f(v)
         self.ui_sentence.set_text(self.nvc.sentence)
 
+    def reset(self):
+        self.nvc = NVC()
+
     def build_ui(self):
         ui.label('I AM')
 
