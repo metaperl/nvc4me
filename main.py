@@ -30,46 +30,60 @@ class NVC(HasTraits):
         self.sentence = " ".join(["I am ", self.feeling_phrase, " ", feelings_joined])
 
 
-class MyApp(Application):
-    nvc = NVC()
+class UI(HasTraits):
+    card = Any()
     ui_sentence = Any()
+    nvc = Any()
+    controller = Any()
 
     def model_update(self, f, v):
         f(v)
-        self.ui_sentence.set_text(self.nvc.sentence)
+        self.ui_sentence.set_text(self.controller.nvc.sentence)
 
     def reset(self):
-        self.nvc = NVC()
-        self.start()
+        self.card.clear()
+        self.controller.start()
 
-    def build_ui(self):
-        ui.label('I AM')
+    def build(self):
 
-        feeling_toggle = ui.toggle(
-            ["feeling", "guessing you are feeling"],
-            value="feeling",
-            on_change=lambda e: self.model_update(self.nvc.store_feeling_phrase, e.value)
-        )
+        with ui.card() as c:
+            ui.label('I AM')
 
-        selects = list()
+            feeling_toggle = ui.toggle(
+                ["feeling", "guessing you are feeling"],
+                value="feeling",
+                on_change=lambda e: self.model_update(self.controller.nvc.store_feeling_phrase, e.value)
+            )
 
-        for f in self.nvc.feeling_types:
-            with ui.row():
-                ui.label(f'{f} Feelings')
-                for _ in feelings[f]:
-                    print(f"--> Currently working with {_}")
-                    with ui.column():
-                        ui.label(_[0].upper())
-                        selects.append(
-                            ui.select(_, on_change=lambda e: self.model_update(self.nvc.add_feeling, e.value))
-                        )
+            selects = list()
 
-        self.ui_sentence = ui.label()
+            for f in self.controller.nvc.feeling_types:
+                with ui.row():
+                    ui.label(f'{f} Feelings')
+                    for _ in feelings[f]:
+                        print(f"--> Currently working with {_}")
+                        with ui.card():
+                            ui.label(_[0].upper())
+                            selects.append(
+                                ui.select(_, on_change=lambda e: self.model_update(self.controller.nvc.add_feeling, e.value))
+                            )
 
-        ui.button('RESET', on_click=lambda: self.reset())
+            self.ui_sentence = ui.label()
+
+            ui.button('RESET', on_click=lambda: self.reset())
+
+            self.card = c
+
+
+class MyApp(Application):
+    nvc = NVC()
+    ui = UI()
 
     def start(self):
-        self.build_ui()
+        self.nvc = NVC()
+        self.ui = UI()
+        self.ui.controller = self
+        self.ui.build()
         ui.run()
 
 
