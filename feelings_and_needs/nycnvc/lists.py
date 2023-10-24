@@ -1,3 +1,5 @@
+from loguru import logger
+
 feelings = dict()
 positive_feelings = list()
 negative_feelings = list()
@@ -174,7 +176,7 @@ listless
 numb
 withdrawn""".split())
 
-negative_feelings.append("""DISQUIET
+negative_feelings.append("""disquiet
 agitated
 alarmed
 concerned
@@ -198,7 +200,7 @@ unnerved
 unsettled
 upset""".split())
 
-negative_feelings.append("""EMBARRASSMENT
+negative_feelings.append("""embarrassment
 ashamed
 chagrined
 discomfited
@@ -293,4 +295,4 @@ pining""".split())
 feelings['positive'] = positive_feelings
 feelings['negative'] = negative_feelings
 
-print(feelings)
+logger.info(str(feelings))
