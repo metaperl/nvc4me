@@ -49,18 +49,17 @@ class UI(HasTraits):
 
         i_am = pn.pane.Markdown("I AM").servable()
         feeling_toggle = pn.widgets.RadioButtonGroup(
-            name='Radio Button Group', options=['feeling', 'guessing you are feeling'], button_type='success').servable()
+            name='Radio Button Group', options=['feeling', 'guessing you are feeling'],
+            button_type='success').servable()
 
         for f in self.controller.nvc.feeling_types:
-            row_elements = list()
-            row_label = f'{f} Feelings'
+            pn_row = pn.Row(f'### {f} feelings:', scroll=False).servable()
             for list_of_feelings in feelings[f]:
                 print(f"--> Currently working with {list_of_feelings}")
                 card_label = list_of_feelings[0].upper()
                 card_select = pn.widgets.Select(options=list_of_feelings)
                 card = pn.Column(f'### {card_label}', card_select)
-                row_elements.append(card)
-            pn.Row(f'### {row_label}', *row_elements).servable()
+                pn_row.append(card)
 
 
 class MyApp(Application):
