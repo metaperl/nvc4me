@@ -53,7 +53,7 @@ class UI(HasTraits):
             button_type='success').servable()
 
         for f in self.controller.nvc.feeling_types:
-            pn_row = pn.Row(f'### {f} feelings:', scroll=False).servable()
+            pn_row = pn.Row(f'### {f} feelings:', scroll=False, sizing_mode='stretch_width').servable()
             for list_of_feelings in feelings[f]:
                 print(f"--> Currently working with {list_of_feelings}")
                 card_label = list_of_feelings[0].upper()
