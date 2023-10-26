@@ -53,13 +53,16 @@ class UI(HasTraits):
             button_type='success').servable()
 
         for f in self.controller.nvc.feeling_types:
-            pn_row = pn.Row(f'### {f} feelings:', scroll=False, sizing_mode='stretch_width').servable()
+            logger.debug(f"FEELING {f}")
+            pn_row = pn.FlexBox(f'### {f} feelings:', scroll=False).servable()
             for list_of_feelings in feelings[f]:
                 print(f"--> Currently working with {list_of_feelings}")
                 card_label = list_of_feelings[0].upper()
                 card_select = pn.widgets.Select(options=list_of_feelings)
                 card = pn.Column(f'### {card_label}', card_select)
                 pn_row.append(card)
+
+        self.ui_sentence = pn.widgets.TextAreaInput(auto_grow=True).servable()
 
 
 class MyApp(Application):
