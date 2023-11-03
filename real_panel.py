@@ -1,6 +1,8 @@
 import panel as pn
 from loguru import logger
 
+APP_TITLE = "Help Me NVC!"
+
 feelings = dict()
 positive_feelings = list()
 negative_feelings = list()
@@ -11,79 +13,29 @@ negative_feelings = list()
 # E.g. "affection" is the category for all of the feelings in that list of
 # positive feelings.
 
-positive_feelings.append("""affectionate
-compassionate
-fond
-loving
-openhearted
-tender
-warm""".split())
-
-positive_feelings.append("""engaged
-absorbed
-curious
-engrossed
-enchanted
-enthralled
-entranced
-fascinated
-interested
-intrigued
-involved
-open
-spellbound
-stimulated""".split())
-
-negative_feelings.append("""anger
-aggravated
-angry
-animosity
-annoyed
-contempt
-disgruntled
-enraged
-exasperated
-furious 
-hate 
-hostile
-incensed
-irate
-irritated
-irked
-livid
-miffed
-nettled
-outraged
-peeved
-resentful""".split())
-
-negative_feelings.append("""aversion
-abhorrence
-appalled
-bothered displeased
-disgust
-dislike 
-enmity
-horrified
-loathing
-repulsion
-revulsion""".split())
-
-feelings['positive'] = positive_feelings
-feelings['negative'] = negative_feelings
+from feelings_and_needs.nycnvc.lists import feelings, needs
 
 _feeling_expr = 'feeling'  # a _feeling_expr is "feeling" or "guessing that you are feeling"
 feelings_set = set()  # the feelings set comes from selecting values in the MultiSelect
 
-ui_sentence = pn.widgets.TextAreaInput(auto_grow=True)
+ui_sentence = pn.widgets.TextAreaInput(name='# Based on', auto_grow=True, sizing_mode="stretch_width")
 
-pn.pane.Markdown("# Let's Build an NVC Sentence")
+pn.pane.Markdown("# Based on").servable()
+pn.widgets.TextAreaInput(name='Describe the conflict', auto_grow=True).servable()
 
 i_am = pn.pane.Markdown("### I am").servable()
 
 
+def grammatical_join(lst):
+    if not lst:
+        return ""
+    elif len(lst) == 1:
+        return str(lst[0])
+    return "{} and {}".format(", ".join(lst[:-1]), lst[-1])
+
+
 def build_sentence(feeling_expr, feeling_words):
-    _ = ', '.join(feeling_words)
+    _ = grammatical_join(feeling_words)
     sentence = "I am " + feeling_expr + " " + _
     return sentence
 
@@ -151,7 +103,7 @@ pn.Column(feeling_toggle, sentence_reactor).servable()
 
 for f in feelings:
     print(f"FEELING {f}")
-    pn_row = pn.Row(f'### {f} feelings:', scroll=False).servable()
+    pn_row = pn.FlexBox(f'### {f.capitalize()} Feelings:', scroll=False).servable()
     for list_of_feelings in feelings[f]:
         # print(f"--> Currently working with {list_of_feelings}")
         card_label = list_of_feelings[0].upper()
@@ -160,4 +112,13 @@ for f in feelings:
         card = pn.Card(pn.Column(card_select, multiselect_reactor), title=card_label, collapsed=True)
         pn_row.append(card)
 
-pn.Column('# Here is our current NVC Sentence', ui_sentence).servable()
+pn_row = pn.FlexBox(f'### Needs:', scroll=False).servable()
+for need_list in needs:
+    # print(f"--> Currently working with {list_of_feelings}")
+    card_label = need_list[0].upper()
+    card_select = pn.widgets.MultiSelect(options=[word.lower() for word in need_list])
+    multiselect_reactor = pn.bind(update_feelings_set, card_select)
+    card = pn.Card(pn.Column(card_select, multiselect_reactor), title=card_label, collapsed=True)
+    pn_row.append(card)
+
+pn.Column('# Here is our current NVC Sentence', ui_sentence).servable(title=APP_TITLE)

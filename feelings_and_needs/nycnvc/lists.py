@@ -1,8 +1,9 @@
 from loguru import logger
 
-feelings = dict()
+feelings = dict()  # https://www.nycnvc.org/feelings
 positive_feelings = list()
 negative_feelings = list()
+needs = list()  # https://www.nycnvc.org/needs
 
 positive_feelings.append("""affectionate
 compassionate
@@ -294,5 +295,119 @@ pining""".split())
 
 feelings['positive'] = positive_feelings
 feelings['negative'] = negative_feelings
+
+needs.append("""AUTONOMY
+choice
+dignity
+freedom
+independence
+self-expression
+space
+spontaneity""".split())
+
+needs.append("""CONNECTION
+acceptance
+affection
+appreciation
+authenticity
+belonging
+care
+closeness
+communication
+communion
+community
+companionship
+compassion
+consideration
+empathy
+friendship
+inclusion
+inspiration
+integrity
+intimacy
+love
+mutuality
+nurturing
+partnership
+presence
+respect/self-respect
+security
+self-acceptance
+self-care
+self-connection
+self-expression
+shared reality
+stability
+support
+to know and be known
+to see and be seen
+trust
+understanding
+warmth""".split())
+
+needs.append("""MEANING
+awareness
+celebration
+challenge
+clarity
+competence
+consciousness
+contribution
+creativity
+discovery
+efficiency
+effectiveness
+growth
+integration
+integrity
+learning
+mourning
+movement
+participation
+perspective
+presence
+progress
+purpose
+self-expression
+stimulation
+understanding""".split())
+
+needs.append("""PEACE
+acceptance
+balance
+beauty
+communion
+ease
+equanimity
+faith
+harmony
+hope
+order
+peace-of-mind
+space""".split())
+
+needs.append("""PHYSICAL 
+WELL-BEING
+air
+care
+comfort
+food
+movement/exercise
+rest/sleep
+safety (physical)
+self-care
+sexual expression
+shelter
+touch
+water""".split())
+
+needs.append("""PLAY
+adventure
+excitement
+fun
+humor
+joy
+relaxation
+stimulation""".split())
 
 logger.info(str(feelings))
