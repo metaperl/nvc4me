@@ -5,15 +5,15 @@ positive_feelings = list()
 negative_feelings = list()
 needs = list()  # https://www.nycnvc.org/needs
 
-positive_feelings.append("""affectionate
+positive_feelings.append(sorted("""affectionate
 compassionate
 fond
 loving
 openhearted
 tender
-warm""".split())
+warm""".splitlines()))
 
-positive_feelings.append("""engaged
+positive_feelings.append(sorted("""engaged
 absorbed
 curious
 engrossed
@@ -26,9 +26,9 @@ intrigued
 involved
 open
 spellbound
-stimulated""".split())
+stimulated""".splitlines()))
 
-positive_feelings.append("""excited
+positive_feelings.append(sorted("""excited
 amazed
 ardent
 aroused 
@@ -41,23 +41,23 @@ invigorated
 lively
 passionate
 surprised
-vibrant""".split())
+vibrant""".splitlines()))
 
-positive_feelings.append("""exhilirated
+positive_feelings.append(sorted("""exhilarated
 enthralled
 radiant
 electrified
 euphoric
 overjoyed
-thrilled""".split())
+thrilled""".splitlines()))
 
-positive_feelings.append("""grateful
+positive_feelings.append(sorted("""grateful
 appreciative
 moved
 thankful
-touched""".split())
+touched""".splitlines()))
 
-positive_feelings.append("""happy
+positive_feelings.append(sorted("""happy
 amused
 blissful
 cheerful
@@ -73,18 +73,18 @@ merry
 overjoyed
 pleased
 rapturous
-tickled""".split())
+tickled""".splitlines()))
 
-positive_feelings.append("""hopeful
+positive_feelings.append(sorted("""hopeful
 confident
 expectant
 jazzed
 lighthearted
 sanguine
 up
-upbeat""".split())
+upbeat""".splitlines()))
 
-positive_feelings.append("""inspired
+positive_feelings.append(sorted("""inspired
 amazed
 eager
 enthused
@@ -93,9 +93,9 @@ moved
 psyched
 stimulated
 stirred
-wonder""".split())
+wonder""".splitlines()))
 
-positive_feelings.append("""peaceful
+positive_feelings.append(sorted("""peaceful
 calm
 comfortable
 centered
@@ -109,17 +109,17 @@ relaxed
 relieved
 satisfied
 serene
-tranquil""".split())
+tranquil""".splitlines()))
 
-positive_feelings.append("""refreshed
+positive_feelings.append(sorted("""refreshed
 recharged
 rejuvenated
 renewed
 rested
 restored
-revived""".split())
+revived""".splitlines()))
 
-negative_feelings.append("""anger
+negative_feelings.append(sorted("""anger
 aggravated
 angry
 animosity
@@ -140,23 +140,25 @@ miffed
 nettled
 outraged
 peeved
-resentful""".split())
+resentful""".splitlines()))
 
-negative_feelings.append("""aversion
+negative_feelings.append(sorted("""aversion
 abhorrence
 appalled
-bothered displeased
+bothered 
+displeased
 disgust
 dislike 
 enmity
 horrified
 loathing
 repulsion
-revulsion""".split())
+revulsion""".splitlines()))
 
-negative_feelings.append("""confusion
+negative_feelings.append(sorted("""confusion
 ambivalent
-baffled bewildered
+baffled 
+bewildered
 conflicted
 dazed
 discombobulated
@@ -164,9 +166,9 @@ disoriented
 mixed
 mystified
 perplexed puzzled
-torn""".split())
+torn""".splitlines()))
 
-negative_feelings.append("""disconnection
+negative_feelings.append(sorted("""disconnection
 apathetic
 bored
 closed
@@ -175,9 +177,9 @@ distant
 indifferent
 listless
 numb
-withdrawn""".split())
+withdrawn""".splitlines()))
 
-negative_feelings.append("""disquiet
+negative_feelings.append(sorted("""disquiet
 agitated
 alarmed
 concerned
@@ -199,19 +201,19 @@ uncomfortable
 uneasy
 unnerved
 unsettled
-upset""".split())
+upset""".splitlines()))
 
-negative_feelings.append("""embarrassment
+negative_feelings.append(sorted("""embarrassment
 ashamed
 chagrined
 discomfited
 flustered
 mortified
-self-conscious""".split())
+self-conscious""".splitlines()))
 
-negative_feelings.append("""fatigue
+negative_feelings.append(sorted("""fatigue
 beat
-burnt out
+burnt-out
 depleted
 exhausted
 listless
@@ -219,10 +221,10 @@ pooped
 sleepy
 tired
 weary
-wiped out
- worn out""".split())
+wiped-out
+ worn-out""".splitlines()))
 
-negative_feelings.append("""fear
+negative_feelings.append(sorted("""fear
 afraid
 anxious
 apprehensive
@@ -241,9 +243,9 @@ shaky
 terrified
 trepidation
 wary
-worried""".split())
+worried""".splitlines()))
 
-negative_feelings.append("""pain
+negative_feelings.append(sorted("""pain
 aching
 agony
 anguished
@@ -255,9 +257,9 @@ hurting
 lonely
 miserable
 regretful
-remorseful""".split())
+remorseful""".splitlines()))
 
-negative_feelings.append("""sadness
+negative_feelings.append(sorted("""sadness
 depressed
 dejected
 despairing 
@@ -272,9 +274,9 @@ hopeless
 melancholy
 miserable
 unhappy
-wistful""".split())
+wistful""".splitlines()))
 
-negative_feelings.append("""tension
+negative_feelings.append(sorted("""tension
 anxious
 closed
 distressed
@@ -286,26 +288,26 @@ jittery
 nervous
 overwhelmed
 restless
-stressed out""".split())
+stressed-out""".splitlines()))
 
-negative_feelings.append("""yearning
+negative_feelings.append(sorted("""yearning
 longing
 nostalgic
-pining""".split())
+pining""".splitlines()))
 
 feelings['positive'] = positive_feelings
 feelings['negative'] = negative_feelings
 
-needs.append("""AUTONOMY
+needs.append(sorted("""AUTONOMY
 choice
 dignity
 freedom
 independence
 self-expression
 space
-spontaneity""".split())
+spontaneity""".splitlines()))
 
-needs.append("""CONNECTION
+needs.append(sorted("""CONNECTION
 acceptance
 affection
 appreciation
@@ -336,16 +338,16 @@ self-acceptance
 self-care
 self-connection
 self-expression
-shared reality
+shared-reality
 stability
 support
 to know and be known
 to see and be seen
 trust
 understanding
-warmth""".split())
+warmth""".splitlines()))
 
-needs.append("""MEANING
+needs.append(sorted("""MEANING
 awareness
 celebration
 challenge
@@ -370,9 +372,9 @@ progress
 purpose
 self-expression
 stimulation
-understanding""".split())
+understanding""".splitlines()))
 
-needs.append("""PEACE
+needs.append(sorted("""PEACE
 acceptance
 balance
 beauty
@@ -384,9 +386,9 @@ harmony
 hope
 order
 peace-of-mind
-space""".split())
+space""".splitlines()))
 
-needs.append("""PHYSICAL 
+needs.append(sorted("""PHYSICAL 
 WELL-BEING
 air
 care
@@ -399,15 +401,15 @@ self-care
 sexual expression
 shelter
 touch
-water""".split())
+water""".splitlines()))
 
-needs.append("""PLAY
+needs.append(sorted("""PLAY
 adventure
 excitement
 fun
 humor
 joy
 relaxation
-stimulation""".split())
+stimulation""".splitlines()))
 
 logger.info(str(feelings))

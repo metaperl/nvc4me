@@ -130,7 +130,7 @@ def update_feelings_set(selected_feelings):
     global feelings_set
     print(f"current pulldown is providing {selected_feelings=}")
 
-    clear_all_feelings(selected_feelings)
+    clear_related_feelings(selected_feelings)
 
     for _ in selected_feelings:
         feelings_set.add(_)

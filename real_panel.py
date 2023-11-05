@@ -18,10 +18,18 @@ from feelings_and_needs.nycnvc.lists import feelings, needs
 _feeling_expr = 'feeling'  # a _feeling_expr is "feeling" or "guessing that you are feeling"
 feelings_set = set()  # the feelings set comes from selecting values in the MultiSelect
 
-ui_sentence = pn.widgets.TextAreaInput(name='# Based on', auto_grow=True, sizing_mode="stretch_width")
+# needs ownership is based on who is feeling
+needs_ownership = {
+    'feeling': 'my',
+    'guessing you are feeling': 'your'
+}
 
-pn.pane.Markdown("# Based on").servable()
-pn.widgets.TextAreaInput(name='Describe the conflict', auto_grow=True).servable()
+needs_set = set()  # the feelings set comes from selecting values in the MultiSelect
+
+ui_sentence = pn.widgets.TextAreaInput(auto_grow=True, sizing_mode="stretch_width")
+
+pn.pane.Markdown("# Describe the conflict").servable()
+pn.widgets.TextAreaInput(auto_grow=True).servable()
 
 i_am = pn.pane.Markdown("### I am").servable()
 
@@ -34,14 +42,22 @@ def grammatical_join(lst):
     return "{} and {}".format(", ".join(lst[:-1]), lst[-1])
 
 
-def build_sentence(feeling_expr, feeling_words):
-    _ = grammatical_join(feeling_words)
+def build_sentence(feeling_expr, current_feelings, current_needs):
+    _ = grammatical_join(current_feelings)
     sentence = "I am " + feeling_expr + " " + _
+
+    needs_expr = needs_ownership[feeling_expr]
+
+    joined_needs = grammatical_join(current_needs)
+    sentence += " " + "because " + needs_expr + " " + "needs for " + joined_needs + " " + "are not met."
+
+    print(f"{sentence=}")
+
     return sentence
 
 
 def update_ui_sentence():
-    _ = build_sentence(_feeling_expr, list(feelings_set))
+    _ = build_sentence(_feeling_expr, list(feelings_set), list(needs_set))
     ui_sentence.value = _
 
 
@@ -66,29 +82,58 @@ def clear_related_feelings(selected_feelings):
     print("--------- END clear_related_feelings")
 
 
-def clear_all_feelings(selected_feelings):
+def clear_all_feelings():
     global feelings_set
-    print("--------- BEGIN clear_related_feelings")
-    print(f"{feelings_set=}")
+
     for feeling_tone in feelings:
         for _ in feelings[feeling_tone]:
             for possible_former_feeling in _:
                 feelings_set.discard(possible_former_feeling)
-    print(f"After clearing all feelings, {feelings_set=}")
-    print("--------- END clear_all_feelings")
+
+
+def clear_all_needs():
+    global needs_set
+
+    for needs_list in needs:
+        for possible_former in needs_list:
+            needs_set.discard(possible_former)
+
+
+def clear_related_needs(selected):
+    global needs_set
+    print("--------- BEGIN clear_related")
+    print(f"{needs_set=}")
+    for _ in needs:
+        for selected_need in selected:
+            if selected_need in _:
+                for possible_former in _:
+                    needs_set.discard(possible_former)
+    print(f"After clearing related , {needs_set=}")
 
 
 def update_feelings_set(selected_feelings):
     global feelings_set
     print(f"current pulldown is providing {selected_feelings=}")
 
-    clear_all_feelings(selected_feelings)
+    clear_related_feelings(selected_feelings)
 
     for _ in selected_feelings:
         feelings_set.add(_)
 
     print(f"After updating {feelings_set=}")
     print("=============================================")
+
+    update_ui_sentence()
+
+
+def update_needs_set(selected):
+    global needs_set
+    print(f"current pulldown is providing {selected}")
+
+    clear_related_needs(selected)
+
+    for _ in selected:
+        needs_set.add(_)
 
     update_ui_sentence()
 
@@ -117,7 +162,7 @@ for need_list in needs:
     # print(f"--> Currently working with {list_of_feelings}")
     card_label = need_list[0].upper()
     card_select = pn.widgets.MultiSelect(options=[word.lower() for word in need_list])
-    multiselect_reactor = pn.bind(update_feelings_set, card_select)
+    multiselect_reactor = pn.bind(update_needs_set, card_select)
     card = pn.Card(pn.Column(card_select, multiselect_reactor), title=card_label, collapsed=True)
     pn_row.append(card)
 
